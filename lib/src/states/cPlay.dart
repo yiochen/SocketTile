@@ -1,5 +1,5 @@
 //controller play.dart
-part of controller;
+part of player;
 
 class c_PlayState extends State{
   @override

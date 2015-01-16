@@ -1,4 +1,4 @@
-part of network;
+part of server;
 
 class Connection{
    WebSocket _socket;
