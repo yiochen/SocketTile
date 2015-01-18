@@ -1,7 +1,7 @@
 library server;
 
 import 'dart:io';
-import 'dart:convert';
+
 part 'src/connection.dart';
 
 class Server{

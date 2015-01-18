@@ -11,6 +11,7 @@ part 'src/states/preload.dart';
 
 Game game;
 WebSocket ws;
+String TAG='game';
 
 class SocketGame{
   SocketGame(String server){
@@ -31,8 +32,8 @@ class SocketGame{
     ws..onOpen.listen(
          (Event e){
            print('connected to server');
-           Map greet={"from":"game","message":"new"};
-           ws.send(JSON.encode(greet));
+           
+           ws.send(newConnM(TAG));
          }
      )
      ..onMessage.listen(

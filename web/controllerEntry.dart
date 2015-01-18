@@ -3,11 +3,14 @@
 import 'dart:html';
 import 'package:SocketTile/common.dart';
 import 'package:SocketTile/player.dart';
+import 'dart:convert';
 
 Player controller;
 WebSocket ws;
 
 void main(){
+  //TODO when deploying on mobile devices, change localhost to the ip of the server
   String server='ws://localhost:$PORT';
   controller=new Player(server);
+  
 }
