@@ -1,8 +1,17 @@
 part of player;
+
 class Gamepad extends Sprite{
-  bool touched=false;
+  static const RELEASE='release';
+  static const TOUCHED='touched';
+  static const CHANGE_DIR='change dir';
+  
+  num dir=null;
+  
+  
   Pointer pointer;
   Graphics stick;
+  StreamController eventbus=new StreamController.broadcast();
+  Stream get onEvent=>eventbus.stream;
   
   num r;//outer radius of the whole joystick
   num sR;//radius of the stick
@@ -29,7 +38,8 @@ class Gamepad extends Sprite{
   ///set the position of the stick according to the coordinate (x,y)
   ///x, y are global coordinates. they could be out of the gamepad area
   setPos(num x, num y){
-    if (touched){
+    if (pointer!=null){
+      
       var _x=relX(x);
       var _y=relY(y);
      
@@ -44,21 +54,36 @@ class Gamepad extends Sprite{
       }
       stick.x=_x;
       stick.y=_y;
-     
-      
+    //TODO if the coordinate is very closed to the center
+    //break the method. otherwise might cause the dirction
+    //to change violently when moving finger acoss the pad.
+      var newDir=sign(Math.abs(_x)-Math.abs(_y))*2+sign(_y-_x);
+      if (newDir!=dir){
+        print('old dir $dir and new dir $newDir');
+        if (dir!=null){
+          //if this is not a new touch,emit change direction event.
+          eventbus.add(CHANGE_DIR);
+        }//otherwise, it is a new touch, new touch event has already be broadcasted
+        dir=newDir;
+        
+      }
     }
   }
   ///release the joystick, make it return to original state.
   release(){
-    touched=false;
+    
     stick.x=0;
     stick.y=0;
     pointer=null;
+    eventbus.add(RELEASE);
   }
   ///touch down and start controlling the joystick
   touchdown(Pointer pointer){
     this.pointer=pointer;
-    touched=true;
+    dir=STALL;
+    eventbus.add(TOUCHED);
+    setPos(pointer.x,pointer.y);
+    
   }
   
   ///check if the global coordinate is within the range of the joystick
@@ -72,7 +97,7 @@ class Gamepad extends Sprite{
   
   @override
   update(){
-    if (touched) setPos(pointer.x, pointer.y);
+    if (pointer!=null) setPos(pointer.x, pointer.y);
     
   }
   

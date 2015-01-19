@@ -2,6 +2,7 @@ library player;
 import 'dart:html';
 import 'package:play_phaser/phaser.dart';
 import 'package:SocketTile/common.dart';
+import 'dart:async';
 part 'src/states/cPlay.dart';
 part 'src/objects/gamepad.dart';
 
