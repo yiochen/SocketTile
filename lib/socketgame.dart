@@ -4,6 +4,7 @@ import 'dart:html';
 import 'dart:convert';
 import 'package:play_phaser/phaser.dart';
 import 'package:SocketTile/common.dart';
+import 'package:SocketTile/world.dart';
 
 part 'src/states/play.dart';
 part 'src/states/preload.dart';
@@ -12,6 +13,7 @@ part 'src/states/preload.dart';
 Game game;
 WebSocket ws;
 String TAG='game';
+
 
 class SocketGame{
   SocketGame(String server){
