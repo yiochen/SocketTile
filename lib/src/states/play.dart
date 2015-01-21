@@ -14,9 +14,10 @@ class PlayState extends State{
   }
   @override
   create(){
-    
-    scene=new GameWorld(game.cache.getJSON('tiles')); 
-    
+    //DEBUG
+    cursors=game.input.keyboard.createCursorKeys();
+    scene=new GameWorld(game.cache.getJSON('tiles'),game,cursors); 
+    scene.initialize();
 //    map=game.add.tilemap('map');
 //    
 //    
@@ -33,14 +34,15 @@ class PlayState extends State{
 //    layer.resizeWorld();
 //    map.setCollisionByIndex(114);
 //    map.setCollisionByIndex(93);
+   
     
     sprite=group.create(55,55,'figure');
     
+    scene.newEntity(sprite);
 //    game.physics.enable(sprite);
     
     
-    //DEBUG
-    cursors=game.input.keyboard.createCursorKeys();
+   
     
   }
   
@@ -56,25 +58,8 @@ class PlayState extends State{
 //    game.physics.arcade.collide(sprite, layer);
 //    sprite.body.velocity.x=0;
 //    sprite.body.velocity.y=0;
-    
-    if (cursors.up.isDown){
-//      sprite.body.velocity.y=-200;
-      sprite.y-=20;
-    }
-    else if (cursors.down.isDown) {
-//      sprite.body.velocity.y = 200;
-      sprite.y+=20;
-    }
-
-    if (cursors.left.isDown) {
-//      sprite.body.velocity.x = -200;
-      sprite.x-=20;
-    }
-    else if (cursors.right.isDown) {
-//      sprite.body.velocity.x = 200;
-      sprite.x+=20;
-      
-    }
+    scene.process();
+   
     group.sort('y',Group.SORT_ASCENDING);
   }
   

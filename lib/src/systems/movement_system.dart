@@ -13,8 +13,23 @@ class MovementSystem extends EntityProcessingSystem{
   void processEntity(Entity entity){
     Position pos=posMap.get(entity);
     Velocity vel=velMap.get(entity);
-    pos.x+=vel.x;
-    pos.y+=vel.y;
+    
+    
+    switch (vel.dir){
+      case UP: 
+        pos.y-=vel.v;
+        break;
+      case DOWN:
+        pos.y+=vel.v;
+        break;
+      case LEFT:
+        pos.x-=vel.v;
+        break;
+      case RIGHT:
+        pos.x+=vel.v;
+        break;
+    }
+    
   }
   
 }

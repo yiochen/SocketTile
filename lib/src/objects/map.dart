@@ -20,22 +20,32 @@ class GameMap{
   
   num get mapWidth=>width*tilesize;
   num get mapHeight=>height*tilesize;
-  int index(int x, int y)=>data[y*width+x];
+  ///get the index of the tile that contains the point (px,py) in the data list
+  int index(num px, num py)=>(py ~/ tilesize)*width+(px ~/ tilesize);
+  
+  int coor2index(int x, int y)=>y*width+x;
+  ///find the tilecode of the tile in row y, column x
+  int tilecode(int x, int y)=>data[coor2index(x,y)];
+  
   Point topLeftPX(int x, int y)=>new Point(x*tilesize, y*tilesize);
+  ///get anchor point coordinate in px. Anchor is the bottom left corner of the tile
+  Point anchorPx(int x, int y)=>new Point(x*tilesize,(y+1)*tilesize);
+  
+  int index2x(int x)=>x % width;
+  int index2y(int y)=>y ~/ width;
   
   num leftPX(int x)=>x*tilesize;
   num rightPX(int x)=>(x+1)*tilesize;
   num topPY(int y)=>y*tilesize;
   num bottomPY(int y)=>(y+1)*tilesize;
-  /// return the nearest unit coordinate in the tilemap 
-  /// for example snap(51,51) will return Point(1,1)
-  Point snap(num x, num y){
-    num low=x/tilesize;
-    String a='ss';
-    
-    return new Point(0,0);
+  
+  //snap the x(or y) to the nearest intersection x(or y). in px
+  num snapPX(num px){
+    num low=(px ~/ tilesize)*tilesize;
+    num high=((px~/ tilesize)+1)*tilesize;
+    return (px-low)<(high-px)?low:high;
   }
-  Point snap2px(num x, num y){
-    return new Point(0,0);
-  }
+  
+  bool snappable(num px)=>(snapPX(px)-px).abs()<threshold;
+  
 }
