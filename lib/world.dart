@@ -23,16 +23,22 @@ part 'src/systems/display_system.dart';
 
 class GameWorld extends World{
   GameMap map;
-  SocketGame socketgame;
+  var socketgame;
   
   GameWorld(Map tilemap,this.socketgame){
     map=new GameMap.fromJSON(tilemap);
-   
+  }
+  
+  
+  void init(){
     
     this.addSystem(new MovementSystem());
     this.addSystem(new VelocitySystem(socketgame.cursor));
     this.addSystem(new DisplaySystem());
+    this.initialize();
   }
+  
+  
   test(){
     print('width ${map.width} height: ${map.height}  threshold ${map.threshold}');
        print('tile size ${map.tilesize}  mapwidth : ${map.mapWidth}');

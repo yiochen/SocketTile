@@ -1,6 +1,5 @@
 part of game;
 class PlayState extends State{
-  GameWorld scene=null;
   
 //  Tilemap map;
 //  TilemapLayer layer;
@@ -12,6 +11,7 @@ class PlayState extends State{
   
   PlayState(this.socketgame){
     this.game=socketgame.game;
+    
   }
   
   
@@ -22,9 +22,10 @@ class PlayState extends State{
   @override
   create(){
     //DEBUG
+    socketgame.background=game.add.group();
     socketgame.characters=game.add.group();
-    scene=new GameWorld(game.cache.getJSON('tiles'),socketgame); 
-    scene.initialize();
+    socketgame.scene=new GameWorld(game.cache.getJSON('tiles'),socketgame); 
+    socketgame.scene.init();
 //    map=game.add.tilemap('map');
 //    
 //    
@@ -44,8 +45,9 @@ class PlayState extends State{
    
     
     
+    rendermap(socketgame.scene.map);
+    newHero(socketgame);
     
-    newHero(scene);
 //    game.physics.enable(sprite);
     
     
@@ -60,14 +62,30 @@ class PlayState extends State{
 //      }
 //    });
 //  }
+  
+  void rendermap(GameMap map) {
+    for (int i=0;i<map.data.length;i++){
+      
+      newBlock(socketgame,map.data[i]-1,i);
+    }
+//    map.data.forEach((index){
+//      
+//    });
+      
+    }
   @override
   update(){
 //    game.physics.arcade.collide(sprite, layer);
 //    sprite.body.velocity.x=0;
 //    sprite.body.velocity.y=0;
-    scene.process();
-   
+    socketgame.scene.process();
     socketgame.characters.sort('y',Group.SORT_ASCENDING);
+//    socketgame.characters.customSort((spr1,spr2){
+//      if (spr1.x-spr1.y<spr2.x-spr2.y)return 1;
+//      if (spr1.x-spr1.y>spr2.x-spr2.y)return -1;
+//      return 0;
+//    });
+    
   }
   
   

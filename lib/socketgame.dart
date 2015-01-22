@@ -20,8 +20,9 @@ class SocketGame{
   Game game;
   //cursor is for Debug only.
   CursorKeys cursor;
-  GameMap map;
+  GameWorld scene;
   Group characters;
+  Group background;
   WebSocket ws;
   
   SocketGame(String server){

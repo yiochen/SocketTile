@@ -6,7 +6,7 @@ class Display extends ComponentPoolable{
   factory Display(phaser.Sprite sprite){
     Display dis=new Poolable.of(Display,_constructor);
     dis.sprite=sprite;
-    //sprite.anchor=new phaser.Point(0,sprite.height);
+    sprite.anchor=new phaser.Point(0,1);
     return dis;
   }
   
