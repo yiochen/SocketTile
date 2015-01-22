@@ -1,32 +1,41 @@
 library game;
 
 import 'dart:html';
-import 'dart:convert';
+
 import 'package:play_phaser/phaser.dart';
 import 'package:SocketTile/common.dart';
 import 'package:SocketTile/world.dart';
+
 
 part 'src/states/play.dart';
 part 'src/states/preload.dart';
 
 
-Game game;
-WebSocket ws;
+
+
 String TAG='game';
 
 
 class SocketGame{
+  Game game;
+  //cursor is for Debug only.
+  CursorKeys cursor;
+  GameMap map;
+  Group characters;
+  WebSocket ws;
+  
   SocketGame(String server){
     initWebSocket(server);
     initCanvas();
+    cursor=game.input.keyboard.createCursorKeys();
   }
   
   void initCanvas(){
     //game=new Game(window.screen.available.width,window.screen.available.height,AUTO,'game');
     game=new Game(WIDTH,HIGHT,AUTO,'game');
     //game.scale.aspectRatio=2.0;
-    game.state.add('preload', new PreloadState());
-    game.state.add('play', new PlayState());
+    game.state.add('preload', new PreloadState(this));
+    game.state.add('play', new PlayState(this));
     game.state.start('preload');
     
   }

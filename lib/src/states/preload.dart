@@ -1,6 +1,11 @@
 part of game;
 
 class PreloadState extends State{
+  SocketGame socketgame;
+  Game game;
+  PreloadState(this.socketgame){
+    this.game=socketgame.game;
+  }
   @override
   preload(){
     game.load.tilemap('map','assets/sampleTilemap.json',null,Tilemap.TILED_JSON);

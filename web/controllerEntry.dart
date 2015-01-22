@@ -3,7 +3,7 @@
 import 'dart:html';
 import 'package:SocketTile/common.dart';
 import 'package:SocketTile/player.dart';
-import 'dart:convert';
+
 
 Player controller;
 WebSocket ws;
