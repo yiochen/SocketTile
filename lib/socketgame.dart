@@ -32,8 +32,8 @@ class SocketGame{
   }
   
   void initCanvas(){
-    //game=new Game(window.screen.available.width,window.screen.available.height,AUTO,'game');
-    game=new Game(WIDTH,HIGHT,AUTO,'game');
+    game=new Game(window.screen.available.width,window.screen.available.height,AUTO,'game');
+    //game=new Game(WIDTH,HIGHT,AUTO,'game');
     //game.scale.aspectRatio=2.0;
     game.state.add('preload', new PreloadState(this));
     game.state.add('play', new PlayState(this));

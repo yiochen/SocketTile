@@ -13,12 +13,14 @@ part 'src/util/entitymaker.dart';
 part 'src/components/position.dart';
 part 'src/components/velocity.dart';
 part 'src/components/display.dart';
+part 'src/components/animation.dart';
 part 'src/components/block.dart';
 part 'src/components/hero.dart';
 
 part 'src/systems/movement_system.dart';
 part 'src/systems/velocity_system.dart';
 part 'src/systems/display_system.dart';
+part 'src/systems/hero_anim_system.dart';
 
 
 class GameWorld extends World{
@@ -35,13 +37,14 @@ class GameWorld extends World{
     this.addSystem(new MovementSystem());
     this.addSystem(new VelocitySystem(socketgame.cursor));
     this.addSystem(new DisplaySystem());
+    this.addSystem(new HeroAnimSystem());
     this.initialize();
   }
   
   
   test(){
     print('width ${map.width} height: ${map.height}  threshold ${map.threshold}');
-       print('tile size ${map.tilesize}  mapwidth : ${map.mapWidth}');
+       print('tile size ${tilesize}  mapwidth : ${map.mapWidth}');
        print('get 1,1: ${map.tilecode(1, 1)}  get left ${map.leftPX(1)} right ${map.rightPX(1)} top ${map.topPY(1)} bottom ${map.bottomPY(1)}');
        print('get topLeft ${map.topLeftPX(2, 1).toString()}');
        print('get anchor point of tile 15 ${map.anchorPx(map.index2x(15),map.index2y(15))}');

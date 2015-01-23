@@ -1,4 +1,6 @@
 part of gameworld;
+///handle static sprite.
+///anchor point is at the bottom left corner;
 class Display extends ComponentPoolable{
   phaser.Sprite sprite;
   

@@ -4,8 +4,7 @@ class GameMap{
   int width;
   int height;
   num threshold;
-  ///tilesize in px
-  num tilesize;
+  
   
   List<int> data;
   ///process Tiled json file and generate 
