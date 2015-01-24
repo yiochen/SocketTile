@@ -21,7 +21,7 @@ class HeroAnimSystem extends EntityProcessingSystem{
     Position pos=posMap.get(entity);
     Velocity vel=velMap.get(entity);
     
-    anim.sprite.x=pos.x-tilesize/2;
+    anim.sprite.x=pos.x+tilesize/2;
     anim.sprite.y=pos.y;
     
     if (vel.v>0){

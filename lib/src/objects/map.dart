@@ -7,6 +7,7 @@ class GameMap{
   
   
   List<int> data;
+  List<Entity> entities;
   ///process Tiled json file and generate 
   GameMap.fromJSON(Map jsonMap){
       height=jsonMap['height'];
