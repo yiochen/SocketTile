@@ -23,6 +23,7 @@ class PlayState extends State{
   create(){
     //DEBUG
     socketgame.background=game.add.group();
+    socketgame.shadow=game.add.group();
     socketgame.characters=game.add.group();
     socketgame.scene=new GameWorld(game.cache.getJSON('tiles'),socketgame); 
     socketgame.scene.init();

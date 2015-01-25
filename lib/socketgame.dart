@@ -22,7 +22,9 @@ class SocketGame{
   CursorKeys cursor;
   GameWorld scene;
   Group characters;
+  Group shadow;
   Group background;
+  
   WebSocket ws;
   
   SocketGame(String server){

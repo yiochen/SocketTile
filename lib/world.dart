@@ -17,12 +17,14 @@ part 'src/components/animation.dart';
 part 'src/components/block.dart';
 part 'src/components/hero.dart';
 part 'src/components/collision.dart';
+part 'src/components/shadow.dart';
 
 part 'src/systems/movement_system.dart';
 part 'src/systems/velocity_system.dart';
 part 'src/systems/display_system.dart';
 part 'src/systems/hero_anim_system.dart';
 part 'src/systems/collision_system.dart';
+part 'src/systems/shadow_system.dart';
 
 class GameWorld extends World{
   GameMap map;
@@ -36,10 +38,12 @@ class GameWorld extends World{
   void init(){
     //velocity
     this.addSystem(new VelocitySystem(socketgame.cursor));
-    //collision
-    this.addSystem(new CollisionSystem(map));
     //position
     this.addSystem(new MovementSystem());
+    //collision
+    this.addSystem(new CollisionSystem(map));
+    //shadow
+    this.addSystem(new ShadowSystem());
     
     this.addSystem(new DisplaySystem());
     this.addSystem(new HeroAnimSystem());

@@ -10,12 +10,14 @@ class GameMap{
   List<Entity> entities;
   ///process Tiled json file and generate 
   GameMap.fromJSON(Map jsonMap){
+      
       height=jsonMap['height'];
       width=jsonMap['width'];
       data=jsonMap['layers'][0]['data'];
+      entities=new List(data.length);
       //only support square tile
       tilesize=jsonMap['tileheight'];
-      threshold=tilesize/5;
+      threshold=tilesize/2;
   }
   
   num get mapWidth=>width*tilesize;
