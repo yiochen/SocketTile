@@ -1,6 +1,6 @@
 part of gameworld;
 
-Entity newHero(socketgame){
+Entity newHero(SocketGame socketgame){
   Entity entity=socketgame.scene.createEntity();
       
   phaser.Sprite sprite=socketgame.characters.create(0,0,'p1');
@@ -12,8 +12,21 @@ Entity newHero(socketgame){
   entity.addComponent(new Animation(sprite));
   entity.addComponent(new Hero());
   entity.addComponent(new Collision(Collision.FIGURE,Collision.ALL));
-  entity.addComponent(new Shadow(socketgame));
+  phaser.Sprite shadow=socketgame.shadow.create(0,0,'shadow');
+  entity.addComponent(new Shadow(shadow));
   entity.addToWorld();
+  
+  return entity;
+}
+Entity newBomb(SocketGame socketgame,num px,num py,int dir){
+  Entity entity=socketgame.scene.createEntity();
+  phaser.Sprite sprite=socketgame.bombs.create(0,0,'bomb');
+  GameMap map=socketgame.scene.map as GameMap;
+  px=map.snapPX(px);
+  py=map.snapPX(py);
+  entity.addComponent(new Position(px,py));
+  entity.addComponent(new Display(sprite));
+  entity.addComponent(new Bomb(100,dir));
   
   return entity;
 }

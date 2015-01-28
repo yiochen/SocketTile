@@ -22,7 +22,9 @@ class SocketGame{
   CursorKeys cursor;
   GameWorld scene;
   Group characters;
+  Group bombs;
   Group shadow;
+  Group groundMarks;
   Group background;
   
   WebSocket ws;

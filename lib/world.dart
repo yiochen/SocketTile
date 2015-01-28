@@ -18,6 +18,8 @@ part 'src/components/block.dart';
 part 'src/components/hero.dart';
 part 'src/components/collision.dart';
 part 'src/components/shadow.dart';
+part 'src/components/bomb.dart'; 
+part 'src/components/timer.dart';
 
 part 'src/systems/movement_system.dart';
 part 'src/systems/velocity_system.dart';
@@ -25,10 +27,11 @@ part 'src/systems/display_system.dart';
 part 'src/systems/hero_anim_system.dart';
 part 'src/systems/collision_system.dart';
 part 'src/systems/shadow_system.dart';
+part 'src/systems/timer_system.dart';
 
 class GameWorld extends World{
   GameMap map;
-  var socketgame;
+  SocketGame socketgame;
   
   GameWorld(Map tilemap,this.socketgame){
     map=new GameMap.fromJSON(tilemap);

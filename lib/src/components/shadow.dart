@@ -3,9 +3,9 @@ class Shadow extends ComponentPoolable{
   phaser.Sprite sprite;
   
   Shadow._();
-  factory Shadow(SocketGame game){
+  factory Shadow(phaser.Sprite sprite){
     Shadow shadow=new Poolable.of(Shadow, _constructor);
-    shadow.sprite=game.shadow.create(0,0,'shadow');
+    shadow.sprite=sprite;
     shadow.sprite.anchor.y=1;
     return shadow;
   }

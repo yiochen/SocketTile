@@ -14,6 +14,7 @@ class PreloadState extends State{
     game.load.json('tiles', 'assets/sampleTilemap.json');
     game.load.image('deco', 'assets/bikkuriman.png');
     game.load.image('shadow', 'assets/shadow.png');
+    game.load.image('bomb','assets/bomb.png');
     game.load.atlasJSONHash('p1','assets/p1_walk.png','assets/p1_walk.json');
   }
   @override
