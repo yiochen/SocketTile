@@ -4,16 +4,19 @@ class Timer extends ComponentPoolable{
   DateTime starttime;
   int loop;
   int maxLoop;
+  bool finished;
   bool checked;
   
-  Timer._(){
-    this.checked=false;
+  Timer._();
+  void init(){
+    this.checked=true;
     this.starttime=new DateTime.now();
     this.loop=0;
+    this.finished=false;
   }
-  
   factory Timer.once(int duration){
     Timer timer=new Poolable.of(Timer, _constructor);
+    timer.init();
     timer.maxLoop=1;
     timer.checked=false;
     timer.duration=duration;
@@ -21,13 +24,16 @@ class Timer extends ComponentPoolable{
   }
   factory Timer.forever(int duration){
     Timer timer=new Poolable.of(Timer,_constructor);
+    timer.init();
     timer.maxLoop=2147483647;
     timer.checked=false;
     timer.duration=duration;
     return timer;
   }
   factory Timer.limited(int duration, int loops){
+    print('new timer');
     Timer timer=new Poolable.of(Timer,_constructor);
+    timer.init();
     timer.maxLoop=loops;
     timer.checked=false;
     timer.duration=duration;

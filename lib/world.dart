@@ -20,6 +20,7 @@ part 'src/components/collision.dart';
 part 'src/components/shadow.dart';
 part 'src/components/bomb.dart'; 
 part 'src/components/timer.dart';
+part 'src/components/child.dart';
 
 part 'src/systems/movement_system.dart';
 part 'src/systems/velocity_system.dart';
@@ -28,6 +29,7 @@ part 'src/systems/hero_anim_system.dart';
 part 'src/systems/collision_system.dart';
 part 'src/systems/shadow_system.dart';
 part 'src/systems/timer_system.dart';
+part 'src/systems/bomb_system.dart';
 
 class GameWorld extends World{
   GameMap map;
@@ -39,6 +41,8 @@ class GameWorld extends World{
   
   
   void init(){
+    //timer
+    this.addSystem(new TimerSystem());
     //velocity
     this.addSystem(new VelocitySystem(socketgame.cursor));
     //position
@@ -47,7 +51,7 @@ class GameWorld extends World{
     this.addSystem(new CollisionSystem(map));
     //shadow
     this.addSystem(new ShadowSystem());
-    
+    this.addSystem(new BombSystem(map));
     this.addSystem(new DisplaySystem());
     this.addSystem(new HeroAnimSystem());
     this.initialize();

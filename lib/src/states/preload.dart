@@ -16,6 +16,8 @@ class PreloadState extends State{
     game.load.image('shadow', 'assets/shadow.png');
     game.load.image('bomb','assets/bomb.png');
     game.load.atlasJSONHash('p1','assets/p1_walk.png','assets/p1_walk.json');
+    game.load.spritesheet('explosion', 'assets/Blaster_Explosion.png', 250,250,9);
+    
   }
   @override
   create(){

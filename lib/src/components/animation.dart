@@ -11,6 +11,11 @@ class Animation extends ComponentPoolable{
     sprite.anchor=new phaser.Point(0.5,1);
     return anim;
   }
-  
+  @override
+  void cleanUp(){
+    //sprite.removeChildren();
+    sprite.kill();
+    sprite=null;
+  }
   static Animation _constructor()=>new Animation._();
 }

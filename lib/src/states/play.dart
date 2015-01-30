@@ -50,7 +50,14 @@ class PlayState extends State{
     
     
     rendermap(socketgame.scene.map);
-    newHero(socketgame);
+    var hero=newHero(socketgame);
+    game.input.keyboard.addKey(Keyboard.SPACEBAR).onDown.add((key){
+      print('explosion!!!');
+      Position pos=hero.getComponentByClass(Position);
+      Velocity vel=hero.getComponentByClass(Velocity);
+      newBomb(socketgame, pos.x, pos.y, vel.dir);
+    });
+    hero.getComponentByClass(Position);
     
 //    game.physics.enable(sprite);
     
@@ -94,4 +101,6 @@ class PlayState extends State{
   
   
  
+  
+  
 }
