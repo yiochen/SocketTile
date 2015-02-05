@@ -13,6 +13,7 @@ class Stat extends ComponentPoolable{
       //default provide half second of immune time;
       stat.immuneTime=(immuneTime!=null)?immuneTime:500;
     }
+    return stat;
   }
   static Stat _constructor()=>new Stat._();
 }

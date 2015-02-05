@@ -12,6 +12,7 @@ Entity newHero(SocketGame socketgame){
   entity.addComponent(new Animation(sprite));
   entity.addComponent(new Hero());
   entity.addComponent(new Collision(Collision.FIGURE,Collision.ALL));
+  entity.addComponent(new Stat(1000,true,500));
   phaser.Sprite shadow=socketgame.shadow.create(0,0,'shadow');
   entity.addComponent(new Shadow(shadow));
   entity.addToWorld();

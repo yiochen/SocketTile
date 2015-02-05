@@ -39,9 +39,11 @@ part 'src/systems/bomb_damage_system.dart';
 class GameWorld extends World{
   GameMap map;
   SocketGame socketgame;
+  List<num> dmgMap;
   
   GameWorld(Map tilemap,this.socketgame){
     map=new GameMap.fromJSON(tilemap);
+    dmgMap=new List<num>.filled(map.height*map.width,0);
   }
   
   
@@ -59,8 +61,8 @@ class GameWorld extends World{
     this.addSystem(new BombDisSystem(map));
     //add immunesystem and damage system
     this.addSystem(new ImmuneSystem());
-    this.addSystem(new DamageSystem(map));
-    this.addSystem(new BombDamageSystem());
+    this.addSystem(new BombDamageSystem(map,dmgMap));
+    this.addSystem(new DamageSystem(map,dmgMap));
     this.addSystem(new DisplaySystem());
     this.addSystem(new HeroAnimSystem());
     this.initialize();

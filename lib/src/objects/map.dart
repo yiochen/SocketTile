@@ -35,7 +35,9 @@ class GameMap{
   Point topLeftPX(int x, int y)=>new Point(x*tilesize, y*tilesize);
   ///get anchor point coordinate in px. Anchor is the bottom left corner of the tile
   Point anchorPx(int x, int y)=>new Point(x*tilesize,(y+1)*tilesize);
-  
+  ///return the index of the tile whose anchor is at (px, py)
+  ///for example, anchor2index(0,55) returns 0
+  int anchor2index(int px, int py)=>(py ~/ tilesize-1)*width+(px ~/ tilesize);
   int index2x(int x)=>x % width;
   int index2y(int y)=>y ~/ width;
   
