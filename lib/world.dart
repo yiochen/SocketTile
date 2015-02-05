@@ -21,6 +21,8 @@ part 'src/components/shadow.dart';
 part 'src/components/bomb.dart'; 
 part 'src/components/timer.dart';
 part 'src/components/child.dart';
+part 'src/components/immune.dart';
+part 'src/components/stat.dart';
 
 part 'src/systems/movement_system.dart';
 part 'src/systems/velocity_system.dart';
@@ -29,7 +31,10 @@ part 'src/systems/hero_anim_system.dart';
 part 'src/systems/collision_system.dart';
 part 'src/systems/shadow_system.dart';
 part 'src/systems/timer_system.dart';
-part 'src/systems/bomb_system.dart';
+part 'src/systems/bomb_dis_system.dart';
+part 'src/systems/damage_system.dart';
+part 'src/systems/immune_system.dart';
+part 'src/systems/bomb_damage_system.dart';
 
 class GameWorld extends World{
   GameMap map;
@@ -51,7 +56,11 @@ class GameWorld extends World{
     this.addSystem(new CollisionSystem(map));
     //shadow
     this.addSystem(new ShadowSystem());
-    this.addSystem(new BombSystem(map));
+    this.addSystem(new BombDisSystem(map));
+    //add immunesystem and damage system
+    this.addSystem(new ImmuneSystem());
+    this.addSystem(new DamageSystem(map));
+    this.addSystem(new BombDamageSystem());
     this.addSystem(new DisplaySystem());
     this.addSystem(new HeroAnimSystem());
     this.initialize();

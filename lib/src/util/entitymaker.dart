@@ -35,7 +35,7 @@ Entity newBomb(SocketGame socketgame,num px,num py,int dir){
   entity.addComponent(new Position(px,py));
   entity.addComponent(new Display(sprite));
   entity.addComponent(new Child(explosion));
-  entity.addComponent(new Bomb(100,dir,length:3));
+  entity.addComponent(new Bomb(100,dir,range:5,length:3));
   Timer timer=new Timer.limited(500,10);
   entity.addComponent(timer);
   print('timer loop: ${timer.loop} checked: ${timer.checked}');

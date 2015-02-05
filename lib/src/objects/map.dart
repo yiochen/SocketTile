@@ -1,8 +1,11 @@
 part of gameworld;
 
 class GameMap{
+  ///how many tiles in a row
   int width;
+  ///how may tiles in a column
   int height;
+  ///how much is allowed for the movement correction, from 0 to half of the tilesize
   num threshold;
   
   
