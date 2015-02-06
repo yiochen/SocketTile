@@ -10,9 +10,9 @@ You will see a little alien figure on the screen, you can move it using arrow ke
 Running **web/controller.html** will provide you a game controller. Currently the game controller is not wired up with the actual game.
 Screenshots
 --------------
-![game](screenshots/game.png%22game%22)
-![explosion](screenshots/explosion.png%22explosion%22)
-![controller](screenshots/controller.png%22controller%22)
+![game](screenshots/game.png)
+![explosion](screenshots/explosion.png)
+![controller](screenshots/controller.png)
 Credit
 -------
 All the assets from http://kenney.nl/
