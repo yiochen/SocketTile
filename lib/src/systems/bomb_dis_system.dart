@@ -22,8 +22,12 @@ class BombDisSystem extends EntityProcessingSystem{
     Timer timer=timeMap.get(entity);
     Display dis=disMap.get(entity);
     Child child=childMap.get(entity);
-    if (timer.finished || bomb.dis==bomb.range){
-      entity.deleteFromWorld();
+    if (timer.finished || bomb.dis>=bomb.range){
+      timer.nextCall=(){
+        entity.deleteFromWorld();
+        entity.changedInWorld();
+      };
+      
       return;
     }
     if (timer.checked==false){

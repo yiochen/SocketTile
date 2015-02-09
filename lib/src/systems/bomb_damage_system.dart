@@ -15,8 +15,7 @@ class BombDamageSystem extends EntityProcessingSystem{
   }
   @override
   void processEntity(Entity entity){
-    // recalculate the damage every frame
-    dmgMap.fillRange(0, dmgMap.length,0);
+    
     Bomb bomb=bombMap.get(entity);
     Position pos=posMap.get(entity);
     int index=map.anchor2index(pos.x, pos.y);
@@ -42,12 +41,16 @@ class BombDamageSystem extends EntityProcessingSystem{
     
     move(bomb.dis);
     map.entities.forEach((entity){
-      (entity.getComponentByClass(Display)as Display).sprite.tint=0xFFFFFF;
+      //(entity.getComponentByClass(Display)as Display).sprite.tint=0xFFFFFF;
     });
     for (int i=bomb.dis;i>bomb.dis-bomb.length && i>0;i--){
-      dmgMap[map.coor2index(x, y)]-=bomb.dmg;
-      (map.entities[map.coor2index(x, y)].getComponentByClass(Display) as Display).sprite.tint=0xFF0000;
-      move(-1);
+      if (map.inRange(x, y)){
+        dmgMap[map.coor2index(x, y)]-=bomb.dmg;
+        //(map.entities[map.coor2index(x, y)].getComponentByClass(Display) as Display).sprite.tint=0xFF0000;
+        move(-1);
+      }else{
+        break;
+      }
     }
     
   }

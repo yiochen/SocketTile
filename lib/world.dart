@@ -23,6 +23,7 @@ part 'src/components/timer.dart';
 part 'src/components/child.dart';
 part 'src/components/immune.dart';
 part 'src/components/stat.dart';
+part 'src/components/spawner.dart';
 
 part 'src/systems/movement_system.dart';
 part 'src/systems/velocity_system.dart';
@@ -40,10 +41,12 @@ class GameWorld extends World{
   GameMap map;
   SocketGame socketgame;
   List<num> dmgMap;
+  List<Entity> spawners;
   
   GameWorld(Map tilemap,this.socketgame){
     map=new GameMap.fromJSON(tilemap);
     dmgMap=new List<num>.filled(map.height*map.width,0);
+    spawners=new List<Entity>();
   }
   
   
@@ -67,7 +70,10 @@ class GameWorld extends World{
     this.addSystem(new HeroAnimSystem());
     this.initialize();
   }
-  
+  void cleanDmgMap(){
+    // recalculate the damage every frame
+    dmgMap.fillRange(0, dmgMap.length,0);
+  }
   
   test(){
     print('width ${map.width} height: ${map.height}  threshold ${map.threshold}');

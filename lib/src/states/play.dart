@@ -89,6 +89,7 @@ class PlayState extends State{
 //    game.physics.arcade.collide(sprite, layer);
 //    sprite.body.velocity.x=0;
 //    sprite.body.velocity.y=0;
+    socketgame.scene.cleanDmgMap();
     socketgame.scene.process();
     socketgame.characters.sort('y',Group.SORT_ASCENDING);
 //    socketgame.characters.customSort((spr1,spr2){

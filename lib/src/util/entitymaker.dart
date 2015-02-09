@@ -7,7 +7,9 @@ Entity newHero(SocketGame socketgame){
   sprite.animations.add('stand',phaser.Animation.generateFrameNames('Symbol 2 instance ',10000,10000,'',5),15,true);
   sprite.animations.add('walk',phaser.Animation.generateFrameNames('Symbol 2 instance ',10001,10010,'',5),2,true);
   sprite.animations.play('stand');
-  entity.addComponent(new Position(110,110));
+  Entity spawner=socketgame.scene.spawners.where((entity)=>(entity.getComponentByClass(Spawner) as Spawner).entity==null).last;
+  Position pos=spawner.getComponentByClass(Position);
+  entity.addComponent(new Position(pos.x,pos.y));
   entity.addComponent(new Velocity(5));
   entity.addComponent(new Animation(sprite));
   entity.addComponent(new Hero());
@@ -47,7 +49,7 @@ Entity newBomb(SocketGame socketgame,num px,num py,int dir){
 Entity newBlock(SocketGame socketgame, int type, int pos,[GameMap gamemap]){
   Entity entity;
   if ((entity=tileGround(socketgame,type,pos,gamemap))!=null) return entity;
-  
+  if ((entity=tileSpawn(socketgame,type,pos,gamemap))!=null) return entity;
   return tileDefault(socketgame,type,pos,gamemap);
 }
 Entity tileGround(SocketGame socketgame, int type, int pos,[GameMap gamemap]){
@@ -63,6 +65,25 @@ Entity tileGround(SocketGame socketgame, int type, int pos,[GameMap gamemap]){
     entity.addComponent(new Collision(Collision.DEFAULT,Collision.NONE));
     map.entities[pos]=entity;
     entity.addToWorld();
+    return entity;
+  }else return null;
+}
+Entity tileSpawn(SocketGame socketgame, int type,int pos,[GameMap gamemap]){
+  if (type==t_SPAWN){
+    GameMap map=(gamemap==null)?socketgame.scene.map:gamemap;
+    Point anchor=map.anchorPx(map.index2x(pos), map.index2y(pos));
+    Entity entity=socketgame.scene.createEntity();
+    phaser.Group group=socketgame.background;
+    phaser.Sprite sprite=group.create(0,0,'kenney',type);
+    entity.addComponent(new Position(anchor.x,anchor.y));
+    entity.addComponent(new Display(sprite));
+    entity.addComponent(new Block());
+    entity.addComponent(new Spawner());
+    entity.addComponent(new Collision(Collision.DEFAULT,Collision.NONE));
+    map.entities[pos]=entity;
+    entity.addToWorld();
+    //TODO: add this entity to a list
+    socketgame.scene.spawners.add(entity);
     return entity;
   }else return null;
 }

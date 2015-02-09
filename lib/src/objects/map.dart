@@ -22,6 +22,9 @@ class GameMap{
       tilesize=jsonMap['tileheight'];
       threshold=tilesize/2;
   }
+  /// return true if tile(x, y) is within the map
+  
+  bool inRange(int x,int y)=>x<this.width && y<this.height&&x>=0&&y>=0;
   
   num get mapWidth=>width*tilesize;
   num get mapHeight=>height*tilesize;

@@ -10,6 +10,7 @@ num tilesize;
 const int t_GROUND=33;
 const int t_BOARDER=92;
 const int t_BOX=50;
+const int t_SPAWN=113;
 const num STALL=-1;
 const num UP=0;
 const num DOWN=1;

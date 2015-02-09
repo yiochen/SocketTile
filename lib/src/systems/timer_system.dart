@@ -17,6 +17,10 @@ class TimerSystem extends EntityProcessingSystem{
         timer.loop++;
         print('timer tick ${timer.loop}');
         timer.starttime=now;    
+        if (timer.nextCall!=null){
+          timer.nextCall();
+          timer.nextCall=null;
+        }
       }
     }else{
       timer.finished=true;
