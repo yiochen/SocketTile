@@ -24,6 +24,7 @@ part 'src/components/child.dart';
 part 'src/components/immune.dart';
 part 'src/components/stat.dart';
 part 'src/components/spawner.dart';
+part 'src/components/impede.dart';
 
 part 'src/systems/movement_system.dart';
 part 'src/systems/velocity_system.dart';
@@ -36,6 +37,7 @@ part 'src/systems/bomb_dis_system.dart';
 part 'src/systems/damage_system.dart';
 part 'src/systems/immune_system.dart';
 part 'src/systems/bomb_damage_system.dart';
+part 'src/systems/impede_system.dart';
 
 class GameWorld extends World{
   GameMap map;
@@ -65,6 +67,8 @@ class GameWorld extends World{
     //add immunesystem and damage system
     this.addSystem(new ImmuneSystem());
     this.addSystem(new BombDamageSystem(map,dmgMap));
+    //add impede system
+    this.addSystem(new ImpedeSystem(map));
     this.addSystem(new DamageSystem(map,dmgMap));
     this.addSystem(new DisplaySystem());
     this.addSystem(new HeroAnimSystem());
