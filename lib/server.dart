@@ -1,10 +1,12 @@
 library server;
 
 import 'dart:io';
+import 'package:SocketTile/common.dart';
 
 part 'src/connection.dart';
 
 class Server{
+  Connection gameConnection;
   List<Connection> clients=new List();
   Server(int port){ 
       HttpServer.bind(InternetAddress.ANY_IP_V4,port).then((HttpServer server){
@@ -13,7 +15,16 @@ class Server{
         server.listen((HttpRequest request){
           if (WebSocketTransformer.isUpgradeRequest(request)){
             //if upgrade request, upgrade http to websocket
-            WebSocketTransformer.upgrade(request).then(handleSocket);
+            Function handler=null;
+            print('receive request ${request.uri.toString()}');
+            if (request.uri.toString()==controllerReq){
+              handler=handleControllerSocket;
+            }else if (request.uri.toString()==gameReq){
+              handler=handleGameSocket;
+            }
+            if (handler!=null){
+              WebSocketTransformer.upgrade(request).then(handler);
+            }
           }else{
             //reject regular request
             print('Regular ${request.method} request for: ${request.uri.path}');
@@ -24,12 +35,14 @@ class Server{
         });
       });
   }
-  void handleSocket(WebSocket socket){
-    print('client connected');
-    
-    Connection client=new Connection(socket);
-    
+  ///The first connection should be game
+  void handleGameSocket(WebSocket socket){
+    print('game client connected');
+    gameConnection=new Connection.game(socket);
+  }
+  void handleControllerSocket(WebSocket socket){
+    print('controller client connected');
+    Connection client=new Connection.controller(gameConnection,socket);
     clients.add(client);
-    
   }
 }

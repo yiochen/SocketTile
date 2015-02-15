@@ -22,10 +22,10 @@ class GameMap{
       tilesize=jsonMap['tileheight'];
       threshold=tilesize/2;
   }
-  /// return true if tile(x, y) is within the map
   
+  /// return true if tile(x, y) is within the map
   bool inRange(int x,int y)=>x<this.width && y<this.height&&x>=0&&y>=0;
-  Entity index2Entity(int index)=>entities[index];
+  Entity index2Entity(int index)=>(index>=0 && index<width*height)?entities[index]:null;
   Entity coor2Entity(int x, int y)=>index2Entity(coor2index(x,y));
   Entity anchor2Entity(int px, int py)=>index2Entity(anchor2index(px,py));
   num get mapWidth=>width*tilesize;

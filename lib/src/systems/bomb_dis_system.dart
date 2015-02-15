@@ -40,19 +40,19 @@ class BombDisSystem extends EntityProcessingSystem{
       bomb.dis++;
       
       switch (bomb.dir){
-        case UP:
+        case d_UP:
           x=0;
           y=-(bomb.dis)*tilesize;
           break;
-        case DOWN:
+        case d_DOWN:
           x=0;
           y=(bomb.dis)*tilesize;
           break;
-        case LEFT:
+        case d_LEFT:
           x=-(bomb.dis)*tilesize;
           y=0;
           break;
-        case RIGHT:
+        case d_RIGHT:
           x=(bomb.dis)*tilesize;
           break;
       }

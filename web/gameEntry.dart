@@ -1,10 +1,18 @@
 //entry point of index.html
 //in charge of rendering the game scene
-
+import 'dart:html';
 import 'package:SocketTile/common.dart';
 import 'package:SocketTile/socketgame.dart';
 
 void main() {
-  String server='ws://localhost:$PORT';
+  querySelector('#connect').onClick.listen(connect);
+}
+
+
+void connect(MouseEvent event) {
+  String ip=(querySelector('#ip') as InputElement).value;
+  String port=(querySelector('#port')as InputElement).value;
+  String server='ws://$ip:$port$gameReq';
+  querySelector('#game').style.display="block";
   SocketGame game=new SocketGame(server);
 }

@@ -16,16 +16,16 @@ class MovementSystem extends EntityProcessingSystem{
     
     
     switch (vel.dir){
-      case UP: 
+      case d_UP: 
         pos.y-=vel.v;
         break;
-      case DOWN:
+      case d_DOWN:
         pos.y+=vel.v;
         break;
-      case LEFT:
+      case d_LEFT:
         pos.x-=vel.v;
         break;
-      case RIGHT:
+      case d_RIGHT:
         pos.x+=vel.v;
         break;
     }

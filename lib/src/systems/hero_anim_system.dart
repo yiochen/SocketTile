@@ -29,10 +29,10 @@ class HeroAnimSystem extends EntityProcessingSystem{
     }else{
       anim.sprite.play('stand');
     }
-    if (vel.dir==LEFT){
+    if (vel.dir==d_LEFT){
       anim.sprite.scale.x=-1;
     }
-    if (vel.dir==RIGHT){
+    if (vel.dir==d_RIGHT){
       anim.sprite.scale.x=1;
     }
   }

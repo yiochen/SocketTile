@@ -22,7 +22,7 @@ class CollisionSystem extends EntityProcessingSystem{
     bool b1,b2,b3,b4;
     //TODO check if collide with blocks
     switch (vel.dir){
-      case UP:
+      case d_UP:
         var y=pos.y-tilesize;
         var x1=pos.x;
         var x4=pos.x+tilesize;
@@ -34,7 +34,7 @@ class CollisionSystem extends EntityProcessingSystem{
         bool b4=_could(getEnt(x4,y),entity);
         handleVertical(pos,b1,b2,b3,b4);
         return;
-      case DOWN:
+      case d_DOWN:
         var y=pos.y;
         var x1=pos.x;
         var x4=pos.x+tilesize;
@@ -46,7 +46,7 @@ class CollisionSystem extends EntityProcessingSystem{
         bool b4=_could(getEnt(x4,y),entity);
         handleVertical(pos,b1,b2,b3,b4);
         return;
-      case LEFT:
+      case d_LEFT:
         var x=pos.x;
         var y1=pos.y-tilesize;
         var y4=pos.y;
@@ -58,7 +58,7 @@ class CollisionSystem extends EntityProcessingSystem{
         bool b4=_could(getEnt(x,y4),entity);
         handleHorizontal(pos,b1,b2,b3,b4);
         return;
-      case RIGHT:
+      case d_RIGHT:
         var x=pos.x+tilesize;
         var y1=pos.y-tilesize;
         var y4=pos.y;
@@ -99,6 +99,7 @@ class CollisionSystem extends EntityProcessingSystem{
   ///return if the two entities could collide based on their category and mask.
   ///returning true doesn't mean they actually collide at the moment.
   bool _could(Entity ent1, Entity ent2){
+    if (ent1==null||ent2==null)return false;
     Collision col1=colMap.getSafe(ent1);
     Collision col2=colMap.getSafe(ent2);
     if (col1==null || col2==null)return false;

@@ -11,7 +11,6 @@ class PlayState extends State{
   
   PlayState(this.socketgame){
     this.game=socketgame.game;
-    
   }
   
   
@@ -30,26 +29,8 @@ class PlayState extends State{
     socketgame.scene=new GameWorld(game.cache.getJSON('tiles'),socketgame); 
     socketgame.scene.init();
     
-//    map=game.add.tilemap('map');
-//    
-//    
-//    map.addTilesetImage('kenney');
-//    layer=map.createLayer("Tile Layer 1");
-    //by setting visible to false will prevent the tilemap from rendering.
-//    layer.visible=true;
-//    layer.getTiles(0, 0, layer.width, layer.height).forEach((tile){
-//      print('tile index ${tile.index} x: ${tile.x} y: ${tile.y}' );
-//    });
-    
-//    createDeco();
-    //layer.debug=true;
-//    layer.resizeWorld();
-//    map.setCollisionByIndex(114);
-//    map.setCollisionByIndex(93);
-   
-    
-    
     rendermap(socketgame.scene.map);
+    
     var hero=newHero(socketgame);
     game.input.keyboard.addKey(Keyboard.SPACEBAR).onDown.add((key){
       print('explosion!!!');
@@ -57,32 +38,16 @@ class PlayState extends State{
       Velocity vel=hero.getComponentByClass(Velocity);
       newBomb(socketgame, pos.x, pos.y, vel.dir);
     });
-    hero.getComponentByClass(Position);
-    
-//    game.physics.enable(sprite);
-    
-    
-   
-    
+ 
   }
   
-//  void createDeco() {
-//    layer.getTiles(0, 0, layer.width,layer.height).forEach((tile){
-//      if (tile.index==93){
-//        group.create(tile.worldX,tile.worldY-game.rnd.pick([20,-20]),'deco');
-//      }
-//    });
-//  }
   
   void rendermap(GameMap map) {
     for (int i=0;i<map.data.length;i++){
       
       newBlock(socketgame,map.data[i]-1,i);
     }
-//    map.data.forEach((index){
-//      
-//    });
-      
+   
     }
   @override
   update(){

@@ -25,23 +25,24 @@ class ImpedeSystem extends EntityProcessingSystem{
     
     void move(int dis){
       switch(bomb.dir){
-        case UP:
+        case d_UP:
           y-=dis;
           break;
-        case DOWN:
+        case d_DOWN:
           y+=dis;
           break;
-        case LEFT:
+        case d_LEFT:
           x-=dis;
           break;
-        case RIGHT:
+        case d_RIGHT:
           x+=dis;
           break;
       }
     }
     move(bomb.dis);
     Entity block=map.coor2Entity(x, y);
-    (block.getComponentByClass(Display) as Display).sprite.tint=0x0000FF;
+//    if (block!=null)
+//    (block.getComponentByClass(Display) as Display).sprite.tint=0x0000FF;
     //might need to replace the destroyed block with new floor block.
   }
 }

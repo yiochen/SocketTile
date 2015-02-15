@@ -18,22 +18,22 @@ class VelocitySystem extends EntityProcessingSystem{
   void processEntity(Entity entity) {
     Velocity vel=velMap.get(entity);
     if (cursor.up.isDown){
-      vel.dir=UP;
+      vel.dir=d_UP;
       vel.v=vel.maxV;
       return;
     }
     if (cursor.down.isDown){
-      vel.dir=DOWN;
+      vel.dir=d_DOWN;
       vel.v=vel.maxV;
       return;
     }
     if (cursor.left.isDown){
-      vel.dir=LEFT;
+      vel.dir=d_LEFT;
       vel.v=vel.maxV;
       return;
     }
     if (cursor.right.isDown){
-      vel.dir=RIGHT;
+      vel.dir=d_RIGHT;
       vel.v=vel.maxV;
       return;
     }

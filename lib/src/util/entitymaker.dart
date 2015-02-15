@@ -64,7 +64,7 @@ Entity tileGround(SocketGame socketgame, int type, int pos,[GameMap gamemap]){
     entity.addComponent(new Display(sprite));
     entity.addComponent(new Block());
     entity.addComponent(new Collision(Collision.DEFAULT,Collision.NONE));
-    map.entities[pos]=entity;
+    //map.entities[pos]=entity;
     entity.addToWorld();
     return entity;
   }else return null;
@@ -72,12 +72,10 @@ Entity tileGround(SocketGame socketgame, int type, int pos,[GameMap gamemap]){
 Entity tileBorder(SocketGame socketgame, int type, int pos, [GameMap gamemap]){
   if (type==t_BOARDER){
     GameMap map=(gamemap==null)?socketgame.scene.map:gamemap;
+    tileGround(socketgame,t_GROUND,pos,map);
     Point anchor=map.anchorPx(map.index2x(pos), map.index2y(pos));
     Entity entity=socketgame.scene.createEntity();
-    phaser.Group group;
-    group=socketgame.background;
-    group.create(anchor.x,anchor.y-tilesize,'kenney',t_GROUND); 
-    group=socketgame.characters;
+    phaser.Group group=socketgame.characters;
     phaser.Sprite sprite=group.create(0,0,'kenney',type);
     entity.addComponent(new Position(anchor.x,anchor.y));
     entity.addComponent(new Display(sprite));
@@ -113,11 +111,10 @@ Entity tileDefault(SocketGame socketgame, int type, int pos, [GameMap gamemap]){
   //add requirement here
   if (true){
     GameMap map=(gamemap==null)?socketgame.scene.map:gamemap;
+    tileGround(socketgame,t_GROUND,pos,map);
     Point anchor=map.anchorPx(map.index2x(pos), map.index2y(pos));
     Entity entity=socketgame.scene.createEntity();
     phaser.Group group;
-    group=socketgame.background;
-    group.create(anchor.x,anchor.y-tilesize,'kenney',t_GROUND); 
     group=socketgame.characters;
     phaser.Sprite sprite=group.create(0,0,'kenney',type);
     entity.addComponent(new Position(anchor.x,anchor.y));
