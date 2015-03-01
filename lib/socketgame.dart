@@ -1,6 +1,7 @@
 library game;
 
 import 'dart:html';
+import 'dart:convert';
 
 import 'package:play_phaser/phaser.dart';
 import 'common.dart';
@@ -50,13 +51,18 @@ class SocketGame{
          (Event e){
            print('connected to server');
            
-           ws.send(newConnM(TAG));
+           ws.send(newConnM(TAG,0));
          }
      )
      ..onMessage.listen(
          (MessageEvent e){
-           
-           print('receive the message ${e.data}');
+           State current=game.state.getCurrentState();
+           if (current is MessegeHandler){
+             //forward the message to the state.
+             (current as MessegeHandler).handle(e.data);
+           }else{
+             print('receive the message ${e.data}');
+           }
          }
      )
      ..onClose.listen(

@@ -68,5 +68,16 @@ class PlayState extends State implements MessegeHandler{
   @override
   void handle(String jsonString) {
     // TODO: implement handle
+    Map message=JSON.decode(jsonString);
+    switch (message["message"]){
+      case m_newConn:
+        //TODO: if new connection, save the id, create a cursor, add the hero
+        break;
+      case m_startmove:
+        break;
+      case m_endmove:
+        //TODO:make sure when endmove, do not clear vel.dir. just change the v
+        break;
+    }
   }
 }

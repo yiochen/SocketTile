@@ -3,7 +3,6 @@ part of gameworld;
 Entity newHero(){
   SocketGame socketgame=gameworld.socketgame;
   Entity entity=socketgame.scene.createEntity();
-      
   phaser.Sprite sprite=socketgame.characters.create(0,0,'p1');
   sprite.animations.add('stand',phaser.Animation.generateFrameNames('Symbol 2 instance ',10000,10000,'',5),15,true);
   sprite.animations.add('walk',phaser.Animation.generateFrameNames('Symbol 2 instance ',10001,10010,'',5),2,true);
@@ -11,7 +10,8 @@ Entity newHero(){
   Entity spawner=socketgame.scene.spawners.where((entity)=>(entity.getComponentByClass(Spawner) as Spawner).entity==null).last;
   Position pos=spawner.getComponentByClass(Position);
   entity.addComponent(new Position(pos.x,pos.y));
-  entity.addComponent(new Velocity(5));
+  entity.addComponent(new Velocity(5,d_RIGHT));
+  
   entity.addComponent(new Animation(sprite));
   entity.addComponent(new Hero());
   entity.addComponent(new Collision(Collision.FIGURE,Collision.ALL));
@@ -30,7 +30,7 @@ Entity newBomb(num px,num py,int dir){
   print('making new bomb, sprite is ${sprite.alive}');
   phaser.Sprite explosion=socketgame.game.add.sprite(0, 0,'explosion');
 
-  GameMap map=socketgame.scene.map as GameMap;
+  GameMap map=socketgame.scene.map;
   px=map.snapPX(px);
   py=map.snapPX(py);
   sprite.x=px;
@@ -107,7 +107,6 @@ Entity tileSpawn(int type,int pos,[GameMap gamemap]){
     entity.addComponent(new Collision(Collision.DEFAULT,Collision.NONE));
     map.entities[pos]=entity;
     entity.addToWorld();
-    //TODO: add this entity to a list
     socketgame.scene.spawners.add(entity);
     return entity;
   }else return null;

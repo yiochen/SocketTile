@@ -1,12 +1,14 @@
 library server;
 
 import 'dart:io';
+import 'dart:convert';
 import 'package:SocketTile/common.dart';
 
 part 'src/connection.dart';
 
 class Server{
   static String TAG="server";
+  int nextId=1;
   Connection gameConnection;
   List<Connection> clients=new List();
   Server(int port){ 
@@ -42,6 +44,7 @@ class Server{
     gameConnection=new Connection.game(socket);
   }
   ///create and add controller client if game client exists
+  ///when a controller client connects, server will assign it an id
   void handleControllerSocket(WebSocket socket){
     print('controller client connected');
     if (gameConnection==null){
@@ -49,8 +52,9 @@ class Server{
       socket.add(errorM(TAG,'no game client connected yet'));
       socket.close();
     }else{
-      Connection client=new Connection.controller(gameConnection,socket);
-      clients.add(client);
+      Connection client=new Connection.controller(gameConnection,socket,nextId);
+      clients[nextId]=client;
+      nextId++;
     }
   }
 }

@@ -5,7 +5,7 @@ class Velocity extends ComponentPoolable{
   int dir;
   
   Velocity._();
-  factory Velocity(num maxV, {num v, int dir}){
+  factory Velocity(num maxV, int dir,{num v}){
     Velocity vel=new Poolable.of(Velocity, _constructor);
     vel.v=(v==null)?0:v;
     vel.maxV=maxV;
