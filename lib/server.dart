@@ -6,6 +6,7 @@ import 'package:SocketTile/common.dart';
 part 'src/connection.dart';
 
 class Server{
+  static String TAG="server";
   Connection gameConnection;
   List<Connection> clients=new List();
   Server(int port){ 
@@ -40,9 +41,16 @@ class Server{
     print('game client connected');
     gameConnection=new Connection.game(socket);
   }
+  ///create and add controller client if game client exists
   void handleControllerSocket(WebSocket socket){
     print('controller client connected');
-    Connection client=new Connection.controller(gameConnection,socket);
-    clients.add(client);
+    if (gameConnection==null){
+      //if game client has not connected yet, reject controller client connection.
+      socket.add(errorM(TAG,'no game client connected yet'));
+      socket.close();
+    }else{
+      Connection client=new Connection.controller(gameConnection,socket);
+      clients.add(client);
+    }
   }
 }

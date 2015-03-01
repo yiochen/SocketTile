@@ -9,7 +9,7 @@ class Connection{
    }
   factory Connection.game(WebSocket socket){
     Connection conn=new Connection._(socket);
-    conn._socket.listen(conn.handleMessage,onDone:conn.handleDisconnect);
+    conn._socket.listen(conn.handleGameMessage,onDone:conn.handleDisconnect);
     return conn;
   }
   
@@ -23,6 +23,10 @@ class Connection{
   
   handleControllerMessage(String s){
     this.gameConn.socket.add(s);
+  }
+  handleGameMessage(String s){
+    //usually game doesnt have any outward message,except reporting win and lose.
+    handleMessage(s);
   }
   handleMessage(String s){
     print('client sent $s');

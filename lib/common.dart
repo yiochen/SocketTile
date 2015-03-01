@@ -1,5 +1,6 @@
 library common;
 import 'dart:convert';
+part 'src/util/messegeHandler.dart';
 //store constants and information share by all libraries.
 const int HIGHT=450;
 const int WIDTH=800;
@@ -33,3 +34,5 @@ String newDirM(String TAG,num dir)=>JSON.encode({'from':TAG,'message':m_dir,'val
 String startMoveM(String TAG)=>JSON.encode({'from':TAG,'message':m_startmove});
 String endMoveM(String TAG)=>JSON.encode({'from':TAG,'message':m_endmove});
 String clickM(String TAG)=>JSON.encode({'from':TAG,'message':m_click});
+String errorM(String TAG,String errorMessage)=>JSON.encode({'from':TAG,'message':errorMessage});
+  

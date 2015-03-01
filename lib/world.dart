@@ -3,8 +3,8 @@ library gameworld;
 import 'package:dartemis/dartemis.dart';
 import 'package:play_phaser/phaser.dart' as phaser;
 import 'dart:math';
-import 'package:SocketTile/common.dart';
-import 'package:SocketTile/socketgame.dart';
+import 'common.dart';
+import 'socketgame.dart';
 
 part 'src/objects/map.dart';
 
@@ -39,6 +39,7 @@ part 'src/systems/immune_system.dart';
 part 'src/systems/bomb_damage_system.dart';
 part 'src/systems/impede_system.dart';
 
+GameWorld gameworld;
 class GameWorld extends World{
   GameMap map;
   SocketGame socketgame;
@@ -53,6 +54,7 @@ class GameWorld extends World{
   
   
   void init(){
+    gameworld=this;
     //timer
     this.addSystem(new TimerSystem());
     //velocity

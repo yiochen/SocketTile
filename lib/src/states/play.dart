@@ -1,5 +1,5 @@
 part of game;
-class PlayState extends State{
+class PlayState extends State implements MessegeHandler{
   
 //  Tilemap map;
 //  TilemapLayer layer;
@@ -31,12 +31,12 @@ class PlayState extends State{
     
     rendermap(socketgame.scene.map);
     
-    var hero=newHero(socketgame);
+    var hero=newHero();
     game.input.keyboard.addKey(Keyboard.SPACEBAR).onDown.add((key){
       print('explosion!!!');
       Position pos=hero.getComponentByClass(Position);
       Velocity vel=hero.getComponentByClass(Velocity);
-      newBomb(socketgame, pos.x, pos.y, vel.dir);
+      newBomb(pos.x, pos.y, vel.dir);
     });
  
   }
@@ -45,7 +45,7 @@ class PlayState extends State{
   void rendermap(GameMap map) {
     for (int i=0;i<map.data.length;i++){
       
-      newBlock(socketgame,map.data[i]-1,i);
+      newBlock(map.data[i]-1,i);
     }
    
     }
@@ -64,9 +64,9 @@ class PlayState extends State{
 //    });
     
   }
-  
-  
- 
-  
-  
+
+  @override
+  void handle(String jsonString) {
+    // TODO: implement handle
+  }
 }

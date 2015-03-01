@@ -3,8 +3,8 @@ library game;
 import 'dart:html';
 
 import 'package:play_phaser/phaser.dart';
-import 'package:SocketTile/common.dart';
-import 'package:SocketTile/world.dart';
+import 'common.dart';
+import 'world.dart';
 
 
 part 'src/states/play.dart';
@@ -55,6 +55,7 @@ class SocketGame{
      )
      ..onMessage.listen(
          (MessageEvent e){
+           
            print('receive the message ${e.data}');
          }
      )

@@ -1,6 +1,7 @@
 part of gameworld;
 
-Entity newHero(SocketGame socketgame){
+Entity newHero(){
+  SocketGame socketgame=gameworld.socketgame;
   Entity entity=socketgame.scene.createEntity();
       
   phaser.Sprite sprite=socketgame.characters.create(0,0,'p1');
@@ -22,8 +23,8 @@ Entity newHero(SocketGame socketgame){
   return entity;
 }
 
-Entity newBomb(SocketGame socketgame,num px,num py,int dir){
-  
+Entity newBomb(num px,num py,int dir){
+  SocketGame socketgame=gameworld.socketgame;
   Entity entity=socketgame.scene.createEntity();
   phaser.Sprite sprite=socketgame.bombs.create();
   print('making new bomb, sprite is ${sprite.alive}');
@@ -46,14 +47,16 @@ Entity newBomb(SocketGame socketgame,num px,num py,int dir){
   return entity;
 }
 
-Entity newBlock(SocketGame socketgame, int type, int pos,[GameMap gamemap]){
+Entity newBlock(int type, int pos,[GameMap gamemap]){
+  SocketGame socketgame=gameworld.socketgame;
   Entity entity;
-  if ((entity=tileGround(socketgame,type,pos,gamemap))!=null) return entity;
-  if ((entity=tileSpawn(socketgame,type,pos,gamemap))!=null) return entity;
-  if ((entity=tileBorder(socketgame,type,pos,gamemap))!=null) return entity;
-  return tileDefault(socketgame,type,pos,gamemap);
+  if ((entity=tileGround(type,pos,gamemap))!=null) return entity;
+  if ((entity=tileSpawn(type,pos,gamemap))!=null) return entity;
+  if ((entity=tileBorder(type,pos,gamemap))!=null) return entity;
+  return tileDefault(type,pos,gamemap);
 }
-Entity tileGround(SocketGame socketgame, int type, int pos,[GameMap gamemap]){
+Entity tileGround(int type, int pos,[GameMap gamemap]){
+  SocketGame socketgame=gameworld.socketgame;
   if (type==t_GROUND){
     GameMap map=(gamemap==null)?socketgame.scene.map:gamemap;
     Point anchor=map.anchorPx(map.index2x(pos), map.index2y(pos));
@@ -69,10 +72,11 @@ Entity tileGround(SocketGame socketgame, int type, int pos,[GameMap gamemap]){
     return entity;
   }else return null;
 }
-Entity tileBorder(SocketGame socketgame, int type, int pos, [GameMap gamemap]){
+Entity tileBorder(int type, int pos, [GameMap gamemap]){
+  SocketGame socketgame=gameworld.socketgame;
   if (type==t_BOARDER){
     GameMap map=(gamemap==null)?socketgame.scene.map:gamemap;
-    tileGround(socketgame,t_GROUND,pos,map);
+    tileGround(t_GROUND,pos,map);
     Point anchor=map.anchorPx(map.index2x(pos), map.index2y(pos));
     Entity entity=socketgame.scene.createEntity();
     phaser.Group group=socketgame.characters;
@@ -87,7 +91,8 @@ Entity tileBorder(SocketGame socketgame, int type, int pos, [GameMap gamemap]){
     return entity;
   }else return null;
 }
-Entity tileSpawn(SocketGame socketgame, int type,int pos,[GameMap gamemap]){
+Entity tileSpawn(int type,int pos,[GameMap gamemap]){
+  SocketGame socketgame=gameworld.socketgame;
   if (type==t_SPAWN){
     GameMap map=(gamemap==null)?socketgame.scene.map:gamemap;
     Point anchor=map.anchorPx(map.index2x(pos), map.index2y(pos));
@@ -107,11 +112,12 @@ Entity tileSpawn(SocketGame socketgame, int type,int pos,[GameMap gamemap]){
     return entity;
   }else return null;
 }
-Entity tileDefault(SocketGame socketgame, int type, int pos, [GameMap gamemap]){
+Entity tileDefault(int type, int pos, [GameMap gamemap]){
+  SocketGame socketgame=gameworld.socketgame;
   //add requirement here
   if (true){
     GameMap map=(gamemap==null)?socketgame.scene.map:gamemap;
-    tileGround(socketgame,t_GROUND,pos,map);
+    tileGround(t_GROUND,pos,map);
     Point anchor=map.anchorPx(map.index2x(pos), map.index2y(pos));
     Entity entity=socketgame.scene.createEntity();
     phaser.Group group;
