@@ -13,28 +13,19 @@
     <meta name="scaffolded-by" content="https://github.com/google/stagehand">
     <title>SocketTile</title>
 
-    <link rel="stylesheet" href="styles/main.css">
-    <style>
-      .center{
-        position:fixed;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,-50%);
-        color: #FF0000;
-      }
-    </style>
+    <link type="text/css" rel="stylesheet" href="styles/main.css" />
 </head>
 
 <body>
   <h1>SocketTile</h1>
-  <div>
-    <div><span>ip</span><input type="text" id="ip"></div>
-    <div><span>port</span><input type="text" id="port"></div>
-  </div>
+  
+  <div><input type="checkbox" id="offline" checked>play offline</div> 
+  <div>ip<input type="text" id="ip"></div>
+  <div>port<input type="text" id="port"></div>
+  
   <button id="connect">Connect</button>
   <div id="game" style="display:none;" class="center"></div>
-
-<script type="application/dart" src="gameEntry.dart"></script>
-<script data-pub-inline src="packages/browser/dart.js"></script>
+  <script type="application/dart" src="gameEntry.dart"></script>
+  <script data-pub-inline src="packages/browser/dart.js"></script>
 </body>
 </html>

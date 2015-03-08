@@ -1,6 +1,6 @@
 part of gameworld;
 
-Entity newHero(){
+Entity newHero(Control control){
   SocketGame socketgame=gameworld.socketgame;
   Entity entity=socketgame.scene.createEntity();
   phaser.Sprite sprite=socketgame.characters.create(0,0,'p1');

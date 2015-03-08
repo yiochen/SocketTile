@@ -10,6 +10,7 @@ import 'world.dart';
 
 part 'src/states/play.dart';
 part 'src/states/preload.dart';
+part 'src/objects/control.dart';
 
 
 
@@ -18,9 +19,10 @@ String TAG='game';
 
 
 class SocketGame{
+  bool offline=true;
   Game game;
-  //cursor is for Debug only.
-  CursorKeys cursor;
+  ControllSystem controllSystem;
+  
   GameWorld scene;
   Group characters;
   Group bombs;
@@ -30,10 +32,15 @@ class SocketGame{
   
   WebSocket ws;
   
-  SocketGame(String server){
-    initWebSocket(server);
+  SocketGame([String server]){
+    if (server!=null){
+      offline=false;
+      initWebSocket(server);
+      
+    }
     initCanvas();
-    cursor=game.input.keyboard.createCursorKeys();
+    controllSystem=new ControllSystem();
+    
   }
   
   void initCanvas(){

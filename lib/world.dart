@@ -9,6 +9,7 @@ import 'socketgame.dart';
 part 'src/objects/map.dart';
 
 part 'src/util/entitymaker.dart';
+part 'src/objects/account.dart';
 
 part 'src/components/position.dart';
 part 'src/components/velocity.dart';
@@ -45,11 +46,14 @@ class GameWorld extends World{
   SocketGame socketgame;
   List<num> dmgMap;
   List<Entity> spawners;
+  AccountManager accManager;
+  ControllSystem controllSystem;
   
   GameWorld(Map tilemap,this.socketgame){
     map=new GameMap.fromJSON(tilemap);
     dmgMap=new List<num>.filled(map.height*map.width,0);
     spawners=new List<Entity>();
+    accManager=new AccountManager();
   }
   
   
@@ -58,7 +62,7 @@ class GameWorld extends World{
     //timer
     this.addSystem(new TimerSystem());
     //velocity
-    this.addSystem(new VelocitySystem(socketgame.cursor));
+    this.addSystem(new VelocitySystem());
     //position
     this.addSystem(new MovementSystem());
     //collision

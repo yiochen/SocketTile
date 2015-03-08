@@ -14,5 +14,7 @@ void connect(MouseEvent event) {
   String port=(querySelector('#port')as InputElement).value;
   String server='ws://$ip:$port$gameReq';
   querySelector('#game').style.display="block";
-  SocketGame game=new SocketGame(server);
+  bool offline=(querySelector('#offline')as InputElement).checked;
+  if (offline) new SocketGame();
+  else new SocketGame(server);
 }
